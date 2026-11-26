@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>qmgateway</ToolCommandName>
+    <PackageId>QMGateway.Cli</PackageId>
+    <Version>0.1.0</Version>
+    <Description>Command-line tool for QMGateway.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/qmgateway-sms/qmgateway-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/qmgateway-sms/qmgateway-dotnet.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../QMGateway/QMGateway.csproj" />
+  </ItemGroup>
+</Project>

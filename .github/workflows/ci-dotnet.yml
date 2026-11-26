@@ -1,0 +1,21 @@
+# CI for the .NET SDK. Actions are pinned to full commit hashes (the tag is in the comment); Dependabot proposes updates.
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with: { dotnet-version: '10.0.x' }
+      - run: dotnet build src/QMGateway -c Release        # builds net8.0, net9.0 and net10.0 with warnings as errors
+      - run: dotnet list src/QMGateway package --vulnerable --include-transitive
+      # The shared contract (webhook signatures, retries, pagination), fetched read-only.
+      - run: git clone --depth 1 https://github.com/qmgateway-sms/qmgateway-contract.git tests/contract
+      - run: dotnet run --project tests/QMGateway.Tests -c Release
